@@ -58,8 +58,115 @@ type Mutation{
 type Subscription{
    userCreated: User
 }
+```
+
+* **Input Types** Son un tipo especial en GraphQL que permite que un objeto pueda ser pasado como parametro/Argumento a una querie y a una mutation.
 
 ```
+//Sin el input type
+
+type Mutation {
+createTask(name: String!, completed: Boolean!, userId: ID!) : Task
+}
+
+//Con el input type
+//El type es TaskInput, y tiene los mismos parametros que el anterior. No repito codigo, y acepto a un objeto como argumento.
+
+type Mutation {
+createTask(task: TaskInput): Task
+updateTask(task: TaskInput): Task
+}
+
+input TaskInput {
+name: String!
+completed: Boolean!
+userId: ID!
+}
+```
+
+* **Custom Scalar Type** Puedo definir mi propio Scalar Type. Esto vamos a verlo mas adelante.
+
+```
+scalar MyCustomScalar
+
+const resolverFunctions = {
+MyCustomScalar: myCustomScalarType
+};
+```
+
+* **Interface Type** Podemos usar tipos abstractos, no pueden ser usados directamente en el schema, pero pueden ser usados como "ahorro de codigo" cuando queremos hacer tipos explicitos de datos.
+
+```
+interface Book {
+title: String
+author: Author
+}
+
+type TextBook implements Book {
+title: String
+author: Author
+classes: [Class]
+}
+```
+
+* **Union Type** Indica que un campo puede retornar mas de un tipo de objeto. No define tipos de campos en si mismo.
+
+```
+union Result = Book | Author
+type Book {
+title: String
+}
+
+type Author{
+name: String
+}
+
+//Result puede devolver un dato de tipo libro o un dato de tipo autor. 
+
+type Query {
+search: [Result]
+}
+```
+
+* **Enum Type** Es parecido al Scalar Type. Solo acepto estos valores como argumento o como retorno.
+
+```
+enum AllowedColor{
+RED
+GREEN
+BLUE
+}
+type Query{
+favoriteColor: AllowedColor // Valor de retorno
+avatar(borderColor: AllowedColor): String // Argumento
+}
+```
+
+# ¿Qué vamos a desarollar?
+
+Vamos a desarollar en esta ocasion un **Task Manager (Gestor de Tareas)**, que va a ser una API que va a contar con la siguientes entidades:
+(Si tiene 👀️ es que para usar esta funcion, el usuario debe estar autenticado)
+
+**Query**
+
+* Task List  👀️
+* Task by ID  👀️
+* User by ID  👀️
+
+**Mutation**
+
+* Add Task  👀️
+* Update Task  👀️
+* Delete Task  👀️
+* Login
+* Signup
+
+**Subscription**
+
+* Usuario Creado
+
+
+
 
 
 
