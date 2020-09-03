@@ -1,8 +1,8 @@
 # Node JS 🎉️
 
-Hola! ❤️ Este repositorio esta basado en un training en el cual vamos a estar viendo, ademas de nodeJS, GraphQL y otras tecnologias, a fin de realizar un proyecto final.
+Hola! ❤️ Este repositorio esta basado en un training en el cual vamos a estar viendo, ademas de nodeJS, GraphQL, TypeOrm, Apollo, JWT, MySQL y otras tecnologias, a fin de realizar un proyecto final, que se detallara mas adelante. 
 
-Hay tanta teoria de JS (asyncAwait, spreadOperator y destructuring) como de GraphQL.
+
 
 ## GraphQL 🚀️ 
 
