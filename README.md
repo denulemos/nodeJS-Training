@@ -1,10 +1,8 @@
 # Node JS 🎉️
 
-Hola! ❤️ Este repositorio esta basado en un training en el cual vamos a estar viendo, ademas de nodeJS, GraphQL, TypeOrm, Apollo, JWT, MySQL y otras tecnologias, a fin de realizar un proyecto final, que se detallara mas adelante. 
+Hola! ❤️ Este repositorio esta basado en un training en el cual vamos a estar viendo, ademas de nodeJS, GraphQL, TypeOrm, Apollo, JWT, MySQL y otras tecnologias, a fin de realizar un proyecto final, que se detallara mas adelante.
 
-
-
-## GraphQL 🚀️ 
+## GraphQL 🚀️
 
 GraphQL resuelve ciertos problemas de REST:
 
@@ -165,8 +163,24 @@ Vamos a desarollar en esta ocasion un **Task Manager (Gestor de Tareas)**, que v
 
 * Usuario Creado
 
+# Seteando nuestro Servidor 🚀️
 
+* Creamos una nueva carpeta, en nuestro caso, es `graph-apollo-api`.
+* Nos movemos a nuestra nueva carpeta e inicializamos paquetes npm -> `npm init -y`.
+* Instalamos express y otros paquetes mas -> `npm install express apollo-server-express cors dotenv`.
+* Una vez instalados todos los paquetes, creamos un `server.js`(No olvidemos de cambiar el package.json con el nuevo nombre de nuestro main).
+* Creamos un archivo `.env` para poner las variables de entorno.
+* Para correrlo solo hacemos `node server.js`. A partir de ahi, si vamos a `localhost:(PORT)` vamos a poder ver lo que devolvamos.
+* Si no queremos re-iniciar el servidor cada vez que hacemos un cambio, instalamos `npm install -d nodemon`.
+* Seteamos nuevos comandos en el `package.json` de la siguiente manera ->
 
+```
+"scripts": {
+"start": "node server.js",
+"dev": "node server.js",
+"test": "echo \"Error: no test specified\" && exit 1"
+},
+```
 
-
+Asi solo con un npm run dev, podemos hacer que el servidor se reinicie ante cada cambio. 
 
