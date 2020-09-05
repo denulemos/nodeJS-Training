@@ -3,7 +3,7 @@ const express = require('express');
 const {ApolloServer, gql} = require('apollo-server-express');
 const cors = require('cors');
 const dotEnv = require('dotenv');
-const {tasks} = require ('./constants'); //Importamos las tasks
+const {tasks, users} = require ('./constants'); //Importamos las tasks
 //Seteamos las variables de entorno
 dotEnv.config(); //Creamos una carpeta .env para poner las variables ahi.
 
@@ -19,6 +19,7 @@ const typeDefs = gql `type Query{
     saludo : String! 
     multiplesItems : [String]!
     tasks:[Task!]
+    task(id: ID!) : Task
 } 
 
 type User {
@@ -40,7 +41,14 @@ const resolvers = {
         Query :{
             saludo : () => "Hola!", //Definimos el valor de saludo 
             multiplesItems : () => ["Somos", "Muchos valores"], //Varios valores
-            tasks: () => tasks //Cuando me refiero a tasks quiero que traiga lo que esta dentro de mi variable "tasks", importada mas arriba
+            tasks: () => tasks, //Cuando me refiero a tasks quiero que traiga lo que esta dentro de mi variable "tasks", importada mas arriba
+            task: (_, {id}) => task.find(task => task.id === id) //Buscamos task por el ID
+        },
+        Task:{
+            //Tomar info del usuario en funcion del ID en tasks
+            user: ({userId}) =>{
+                console.log('userId', userId);
+                return users.find(user => user.id === userId)}
         }
 };
 
