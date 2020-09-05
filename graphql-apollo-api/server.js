@@ -3,7 +3,7 @@ const express = require('express');
 const {ApolloServer, gql} = require('apollo-server-express');
 const cors = require('cors');
 const dotEnv = require('dotenv');
-
+const {tasks} = require ('./constants'); //Importamos las tasks
 //Seteamos las variables de entorno
 dotEnv.config(); //Creamos una carpeta .env para poner las variables ahi.
 
@@ -16,10 +16,33 @@ app.use(cors())
 app.use(express.json());
 
 const typeDefs = gql `type Query{
-    saludo : String
-} `;
+    saludo : String! 
+    multiplesItems : [String]!
+    tasks:[Task!]
+} 
 
-const resolvers = {};
+type User {
+    id: ID!
+    nombre: String!
+    email: String!
+    tasks : [Task!]
+}
+
+type Task{
+    id: ID!
+    nombre: String!
+    hecho: Boolean!
+    user: User!
+}
+`; 
+
+const resolvers = {
+        Query :{
+            saludo : () => "Hola!", //Definimos el valor de saludo 
+            multiplesItems : () => ["Somos", "Muchos valores"], //Varios valores
+            tasks: () => tasks //Cuando me refiero a tasks quiero que traiga lo que esta dentro de mi variable "tasks", importada mas arriba
+        }
+};
 
 const apolloServer = new ApolloServer({
     typeDefs, //Definen el schema
